@@ -11,14 +11,14 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'turbolinks'
 
-# Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-gem 'spring', group: :development
-
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+# functional
+gem 'viddl-rb'
+gem 'carrierwave'
+gem 'faye'
 
 group :development do
   gem 'capistrano-rails'
+  gem 'spring'
 end
 
 group :development, :test do
