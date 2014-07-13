@@ -1,5 +1,5 @@
 class Download < ActiveRecord::Base
-  validates :original_uri, :file_uri, :file, presence: true
-  validates :file_uri, uniqueness: true
+  validates :original_uri, presence: true, video_uri: true
 
+  mount_uploader :video_file, VideoUploader
 end

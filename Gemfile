@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 
-gem 'rails', '4.1.1'
+gem 'rails', '4.1.4'
 gem 'pg'
 
 # assets
@@ -14,6 +14,8 @@ gem 'turbolinks'
 # functional
 gem 'viddl-rb'
 gem 'carrierwave'
+gem 'faye'
+gem 'sidekiq'
 
 group :development do
   gem 'capistrano-rails'
@@ -23,6 +25,7 @@ end
 group :development, :test do
   gem 'rspec-rails'
   gem 'database_cleaner'
+  gem 'fabrication'
 end
 
 group :production do

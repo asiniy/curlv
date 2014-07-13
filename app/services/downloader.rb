@@ -1,26 +1,22 @@
 class Downloader
-  def initialize(params = {})
-    @params = params
-  end
+  def self.run(download_id)
+    @download = Download.find(download_id)
 
-  def run
-    @download = Download.new()
-
-
-    download
-    convert
+    download_video
+    # convert TODO convert audio to video online
   end
 
 private
 
-  def download
-    video_url = ViddlRb.get_urls(@params[:uri]).last
-    video_name = ViddlRb.get_names(@params[:uri]).last
+  def self.download_video
+    video_uri = ViddlRb.get_urls(@download.original_uri).last
+    video_name = ViddlRb.get_names(@download.original_uri).last.gsub(CarrierWave::SanitizedFile.sanitize_regexp, '_')
+    FileUtils.mkdir_p @download.video_file.store_dir
 
-    ViddlRb::DownloadHelper.save_file(video_url, video_name, { save_dir: Rails.root.join('tmp')})
-  end
+    ViddlRb::DownloadHelper.save_file(video_uri, video_name, { save_dir: @download.video_file.store_dir })
 
-  def convert
-    #
+    @download.video_file.ensure_multipart_form = false
+    @download.video_file.store! Rails.root.join(@download.video_file.store_dir, video_name)
+    @download.save!
   end
 end

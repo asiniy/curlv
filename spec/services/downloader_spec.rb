@@ -1,7 +1,16 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe Downloader do
-  describe '#parse_link' do
+RSpec.describe Downloader do
+  let(:download) { Fabricate(:download) }
 
+  it 'load and store just 1 video from youtube' do
+    Downloader.run(download.id)
+
+    download.reload
+
+    expect(download[:video_file]).to eq('Кот_красиво_прыгнул.webm')
+    expect(Dir.entries(download.video_file.store_dir).size).to eq(3)
+
+    download.remove_video_file!
   end
 end
