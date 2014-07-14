@@ -5,7 +5,6 @@ RSpec.describe Download, type: :model do
     %w{
       http://www.youtube.com/watch?v=CmKhGNrR0RQ#t=173
       http://vimeo.com/96030980
-      http://youtube.com/watch?v=8khdxVWDupc
       http://www.youtube.com/watch?v=uKsx1DRLHf0
     }.each do |video_uri|
       expect(Fabricate.build(:download, original_uri: video_uri)).to be_valid
