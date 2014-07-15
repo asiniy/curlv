@@ -1,0 +1,6 @@
+h1 = @download.original_uri
+
+= div_for @download do
+  = @download.status_message.html_safe
+
+p = link_to 'root', root_path

@@ -9,7 +9,7 @@ RSpec.describe Downloader do
     download.reload
 
     expect(download[:video_file]).to eq('Кот_красиво_прыгнул.webm')
-    expect(Dir.entries(download.video_file.store_dir).size).to eq(3)
+    expect(Dir.entries(Rails.root.join('public', download.video_file.store_dir)).size).to eq(3)
 
     download.remove_video_file!
   end

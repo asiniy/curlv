@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 gem 'rails', '4.1.4'
 gem 'pg'
 
@@ -17,9 +16,22 @@ gem 'carrierwave'
 gem 'faye'
 gem 'sidekiq'
 
+# layout
+gem 'slim-rails'
+gem 'simple_form'
+gem 'draper'
+
+# helpers
+gem 'figaro', git: 'git@github.com:laserlemon/figaro.git'
+
 group :development do
   gem 'capistrano-rails'
   gem 'spring'
+
+  gem 'thin'
+  gem 'quiet_assets'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 group :development, :test do

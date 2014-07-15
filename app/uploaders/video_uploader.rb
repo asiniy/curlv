@@ -2,7 +2,7 @@ class VideoUploader < CarrierWave::Uploader::Base
   storage :file
 
   def store_dir
-    "public/uploads/video/#{model.id}" # see config/initializers/carrierwave.rb
+    "uploads/video/#{model.id}"
   end
 
   def extension_white_list

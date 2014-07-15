@@ -1,6 +1,7 @@
 class DownloadsController < ApplicationController
   def index
-    @downloads = Download.last(20)
+    @download = Download.new
+    @downloads = Download.last(10).reverse
   end
 
   def create
@@ -15,12 +16,12 @@ class DownloadsController < ApplicationController
   end
 
   def show
-    @download = Download.find(params[:id])
+    @download = Download.find(params[:id]).decorate
   end
 
 private
 
   def download_params
-    params.require(:download).permit!(:original_uri)
+    params.require(:download).permit(:original_uri)
   end
 end

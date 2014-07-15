@@ -1,0 +1,8 @@
+= simple_form_for @download do |f|
+  = f.input :original_uri, input_html: { style: 'width:600px;' }
+  = f.button :submit
+
+- @downloads.each do |download|
+  p
+    =' download.id
+    = download.original_uri
