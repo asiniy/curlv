@@ -23,6 +23,7 @@ gem 'draper'
 
 # helpers
 gem 'figaro', git: 'git@github.com:laserlemon/figaro.git'
+gem 'foreman'
 
 group :development do
   gem 'capistrano-rails'
