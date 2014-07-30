@@ -1,7 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe Downloader do
+  before do
+    WebMock.disable_net_connect!(allow: /.com/)
+    stub_request(:any, 'http://localhost:9292/faye').to_return(success: true)
+  end
+
+  after do
+    WebMock.allow_net_connect!
+  end
+
   let(:download) { Fabricate(:download) }
+  let(:converted) { Fabricate(:download_and_convert) }
 
   it 'load and store just 1 video from youtube' do
     Downloader.run(download.id)
@@ -14,8 +24,6 @@ RSpec.describe Downloader do
 
     download.remove_video_file!
   end
-
-  let(:converted) { Fabricate(:download_and_convert) }
 
   it 'load and gives the audio' do
     Downloader.run(converted.id)

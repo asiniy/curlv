@@ -37,8 +37,12 @@ end
 
 group :development, :test do
   gem 'rspec-rails'
-  gem 'database_cleaner'
   gem 'fabrication'
+end
+
+group :test do
+  gem 'database_cleaner'
+  gem 'webmock'
 end
 
 group :production do

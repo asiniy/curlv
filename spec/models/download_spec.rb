@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Download, type: :model do
+  before do
+    WebMock.allow_net_connect!
+  end
+
   it 'validates video uri' do
     %w{
       http://www.youtube.com/watch?v=CmKhGNrR0RQ#t=173
