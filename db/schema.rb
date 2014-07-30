@@ -17,8 +17,10 @@ ActiveRecord::Schema.define(version: 20140708041134) do
   enable_extension "plpgsql"
 
   create_table "downloads", force: true do |t|
-    t.string   "original_uri", null: false
+    t.string   "original_uri",                  null: false
     t.string   "video_file"
+    t.boolean  "convert_audio", default: false, null: false
+    t.string   "audio_file"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

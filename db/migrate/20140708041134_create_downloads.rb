@@ -3,6 +3,8 @@ class CreateDownloads < ActiveRecord::Migration
     create_table :downloads do |t|
       t.string :original_uri, null: false
       t.string :video_file # VideoUploader
+      t.boolean :convert_audio, null: false, default: false
+      t.string :audio_file # AudioUploader
 
       t.timestamps
     end

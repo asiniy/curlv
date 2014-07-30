@@ -6,6 +6,7 @@ class DownloadsController < ApplicationController
 
   def create
     @download = Download.new(download_params)
+    @downloads = Download.last(10).reverse
 
     if @download.save
       Downloader.delay.run(@download.id)
@@ -22,6 +23,6 @@ class DownloadsController < ApplicationController
 private
 
   def download_params
-    params.require(:download).permit(:original_uri)
+    params.require(:download).permit(:original_uri, :convert_audio)
   end
 end

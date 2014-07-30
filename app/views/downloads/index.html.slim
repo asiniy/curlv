@@ -1,5 +1,6 @@
 = simple_form_for @download do |f|
   = f.input :original_uri, input_html: { style: 'width:600px;' }
+  = f.input :convert_audio, as: :boolean
   = f.button :submit
 
 - @downloads.each do |download|

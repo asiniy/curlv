@@ -1,12 +1,12 @@
 require 'action_view/record_identifier'
-include ActionView::RecordIdentifier
+require 'open3'
 
 class Downloader
   def self.run(download_id)
     @download = Download.find(download_id).decorate
 
     download_video
-    # convert TODO convert audio to video online
+    convert_audio if @download.convert_audio?
   end
 
 private
@@ -27,9 +27,29 @@ private
     broadcast
   end
 
+  def self.convert_audio
+    audio_dir = Rails.root.join('public', @download.audio_file.store_dir)
+
+    FileUtils.mkdir_p audio_dir
+
+    Open3.popen3("ffmpeg -i #{@download.video_file.path} -ab 128 #{audio_dir}/music.mp3") { |stdin, stdout, stderr, wait_thr| stdout.read }
+
+    @download.audio_file.ensure_multipart_form = false
+    @download.audio_file.store! Rails.root.join(audio_dir, 'music.mp3')
+    @download.save!
+
+    broadcast
+  end
+
   def self.broadcast
-    message = { channel: '/downloads/status_message', data: { message: @download.status_message, id: dom_id(@download) }, ext: { auth_token: ENV['faye_token'] }}
     uri = URI.parse('http://localhost:9292/faye')
-    Net::HTTP.post_form(uri, message: message.to_json)
+    Net::HTTP.post_form(uri, message: {
+      channel: '/downloads/status_message',
+      data: {
+        message: @download.status_message,
+        id: ActionView::RecordIdentifier.dom_id(@download) },
+        ext: { auth_token: ENV['faye_token']
+      }
+    }.to_json)
   end
 end
