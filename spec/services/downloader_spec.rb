@@ -22,8 +22,10 @@ RSpec.describe Downloader do
 
     converted.reload
 
-    expect(converted[:audio_file]).to eq('music.mp3')
+    expect(converted[:audio_file]).to eq('Кот_красиво_прыгнул.mp3')
+    expect(Dir.entries(Rails.root.join('public', converted.audio_file.store_dir)).size).to eq(3)
 
     download.remove_video_file!
+    download.remove_audio_file!
   end
 end

@@ -28,14 +28,15 @@ private
   end
 
   def self.convert_audio
+    audio_name = File.basename(@download.video_file.path, @download.video_file.file.extension) + 'mp3'
     audio_dir = Rails.root.join('public', @download.audio_file.store_dir)
 
     FileUtils.mkdir_p audio_dir
 
-    Open3.popen3("ffmpeg -i #{@download.video_file.path} -ab 128 #{audio_dir}/music.mp3") { |stdin, stdout, stderr, wait_thr| stdout.read }
+    Open3.popen3("ffmpeg -i #{@download.video_file.path} -ab 128 #{audio_dir}/#{audio_name}") { |stdin, stdout, stderr, wait_thr| stdout.read }
 
     @download.audio_file.ensure_multipart_form = false
-    @download.audio_file.store! Rails.root.join(audio_dir, 'music.mp3')
+    @download.audio_file.store! Rails.root.join(audio_dir, audio_name)
     @download.save!
 
     broadcast
