@@ -1,1 +1,1 @@
-Figaro.require('faye_token')
+Figaro.require_keys('faye_token')

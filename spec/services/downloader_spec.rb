@@ -1,14 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Downloader do
-  before do
-    WebMock.disable_net_connect!(allow: /.com/)
-    stub_request(:any, 'http://localhost:9292/faye').to_return(success: true)
-  end
-
-  after do
-    WebMock.allow_net_connect!
-  end
+  before(:each) { WebMock.disable_net_connect! }
 
   let(:download) { Fabricate(:download) }
   let(:converted) { Fabricate(:download_and_convert) }
