@@ -12,6 +12,7 @@ gem 'turbolinks'
 
 # functional
 gem 'viddl-rb'
+gem 'curb'
 gem 'carrierwave'
 gem 'faye'
 gem 'sidekiq'

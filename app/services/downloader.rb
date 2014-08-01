@@ -18,7 +18,7 @@ private
 
     FileUtils.mkdir_p video_dir
 
-    ViddlRb::DownloadHelper.save_file(video_uri, video_name, { save_dir: video_dir })
+    File.open(Rails.root.join(video_dir, video_name), 'w+') { |f| f.write Curl.get(video_uri).body_str.force_encoding('UTF-8') }
 
     @download.video_file.ensure_multipart_form = false
     @download.video_file.store! Rails.root.join(video_dir, video_name)

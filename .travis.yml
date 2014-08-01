@@ -8,7 +8,7 @@ notifications:
 script: bundle exec rspec spec
 before_install:
   - sudo apt-get update
-  - sudo apt-get install -qq ffmpeg
+  - sudo apt-get install -qq ffmpeg libcurl3 libcurl3-gnutls libcurl4-openssl-dev
 before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
   - cp config/database.yml.travis config/database.yml
