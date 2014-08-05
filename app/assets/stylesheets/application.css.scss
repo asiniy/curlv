@@ -1,0 +1,44 @@
+/*
+ *= require_tree .
+ *= require_self
+*/
+
+
+.grid--ln{
+  .grid--cont {
+
+    .header {
+      font-size: 3.5em;
+      text-align: center;
+      padding-top: 0.5em;
+      text-shadow: 1px 1px 2px rgba(0, 172, 238, 1);
+    }
+
+    .copyright {
+      text-align: center;
+
+      a {
+        text-decoration: none;
+        border-bottom: 1px dotted black;
+      }
+    }
+
+    .content {
+      margin-top: 2.5em;
+      text-align: center;
+
+      #download_original_uri {
+        width: 350px;
+      }
+
+      #download_convert_audio {
+        height: 30px;
+      }
+
+      .downloads_list {
+        margin-top: 3em;
+      }
+    }
+
+  }
+}

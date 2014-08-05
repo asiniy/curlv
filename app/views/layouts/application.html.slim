@@ -3,8 +3,17 @@ html
   head
     title Curlv
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = stylesheet_link_tag 'http://rocketcss.com/css/rocket.css'
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = javascript_include_tag 'http://localhost:9292/faye.js'
     = csrf_meta_tags
   body
-    = yield
+    .grid--ln
+      .grid--cont
+        .itm--12.header Video & Audio download
+        .itm--12.copyright
+          ' by
+          = link_to 'Alex Antonov', 'http://asiniy.ru'
+    .grid--ln
+      .grid--cont
+        .itm--12.content = yield

@@ -19,7 +19,6 @@ gem 'sidekiq'
 
 # layout
 gem 'slim-rails'
-gem 'simple_form'
 gem 'draper'
 
 # helpers
