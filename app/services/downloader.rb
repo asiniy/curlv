@@ -33,7 +33,7 @@ private
 
     FileUtils.mkdir_p audio_dir
 
-    Open3.popen3("ffmpeg -i #{@download.video_file.path} -ab 128 #{audio_dir}/#{audio_name}") { |stdin, stdout, stderr, wait_thr| stdout.read }
+    Open3.popen3("avconv -i #{@download.video_file.path} -ab 128 #{audio_dir}/#{audio_name}") { |stdin, stdout, stderr, wait_thr| stdout.read }
 
     @download.audio_file.ensure_multipart_form = false
     @download.audio_file.store! Rails.root.join(audio_dir, audio_name)

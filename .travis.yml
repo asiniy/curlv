@@ -1,6 +1,6 @@
 language: ruby
 rvm:
-  - 2.1.0
+  - 2.2.1
 gemfile:
   - Gemfile
 notifications:
@@ -8,7 +8,7 @@ notifications:
 script: bundle exec rspec spec
 before_install:
   - sudo apt-get update
-  - sudo apt-get install -qq ffmpeg libcurl3 libcurl3-gnutls libcurl4-openssl-dev
+  - sudo apt-get install -qq libav-tools libcurl3 libcurl3-gnutls libcurl4-openssl-dev
 before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
   - cp config/database.yml.travis config/database.yml
